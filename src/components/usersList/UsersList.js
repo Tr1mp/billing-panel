@@ -1,8 +1,19 @@
 
 
+import { useEffect } from 'react';
+
+
+import useAuthUser from '../../services/AuthUser';
+
+
 import './usersList.scss';
 
 const UsersList = () => {
+    const {isUser} = useAuthUser();
+    useEffect(() => {
+        isUser();
+    }, [])
+
     return (
         <ul>
             <li className="tasks__list_item">
