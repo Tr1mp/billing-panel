@@ -9,6 +9,12 @@
         margin: 30px auto;
     }
 
+    &__error {
+        margin-top: 5px;
+        color: $red;;
+        font-size: 20px;
+    }
+
     &-group {
         margin: 40px auto 0;
         height: 50px;
@@ -73,7 +79,7 @@
         }
         
         &-input:focus ~ &-placeholder {
-            color: #dc2f55;
+            color: $red;
         }
     }
 }

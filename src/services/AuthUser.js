@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 
 const useAuthUser = () => {
-    const __urlApptrix = "http://erp.apptrix.ru/api/token/"; 
+    const _urlApptrix = "http://erp.apptrix.ru/api/token/"; 
     const navigate = useNavigate();
     const {request} = useHttp();
     
@@ -41,31 +41,31 @@ const useAuthUser = () => {
     const rememberToken = (tokens) => {
         localStorage.setItem('access', tokens.access);
         localStorage.setItem('refresh', tokens.refresh);
+        login();
     }
 
 
-    // Можно было объединить в один функции с запром, 
-    // но тогда бы они были не читабельные
+    // Можно было объединить в один функции с запросом, 
+    // но тогда бы они были не читабельные и слишком сложные.
 
     const requetsLogin = (username, password) => {
         const body = JSON.stringify({username, password});
-        request(__urlApptrix, body, "POST")
-            .then(rememberToken)
-            .catch(console.log);
+        return request(_urlApptrix, body, "POST")
+            .then(rememberToken);
     } 
     
     const changeToken = () => {
         const body = JSON.stringify({
             refresh: localStorage.getItem('refresh')
         })
-        request(`${__urlApptrix}refresh/`, body, 'POST')
+        request(`${_urlApptrix}refresh/`, body, 'POST')
             .then(rememberToken)
             .catch(logout);
     }
 
     // та самая функция, которая выдаёт ошибку 400 при запросе с токеном в header.
     const middleware = () => {
-        request(__urlApptrix, null, "POST", header)
+        request(_urlApptrix, null, "POST", header)
             .then(rememberToken)
             .catch(err => err.message === '401' ? changeToken : console.log(err));
     }
