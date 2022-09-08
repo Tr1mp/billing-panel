@@ -3,7 +3,7 @@ import './timesheets.scss';
 const Timesheets = () => {
     return (
         <div className='tasks__list-wrapper'>
-            <button className='button-submit small'>Print PDF</button>
+            <button className='btn btn-primary small'>Print PDF</button>
             <ul>
                 <li className="tasks__list-item">
                     <div className="tasks__list-item-text">

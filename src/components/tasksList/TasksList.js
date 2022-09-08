@@ -36,7 +36,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -51,7 +51,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -66,7 +66,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -81,7 +81,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -96,7 +96,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -111,7 +111,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>
@@ -126,7 +126,7 @@ const TasksList = () => {
                         Sample Project
                     </div>
 
-                    <a href={`#`} className="button-submit small">
+                    <a href={`#`} className="btn btn-primary small">
                         Timesheets
                     </a>
                 </li>

@@ -22,7 +22,6 @@ const Authorization = () => {
             .catch(err => err.message === "401" ?
                 setError("Неправильное имя пользователя или пароль") :
                 setError(`Error ${err.message}`));
-        (isUser() ? navigate('/') : null)();
     }
 
     const authForm = () => {

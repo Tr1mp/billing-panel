@@ -1,10 +1,11 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import useAuthUser from '../../services/AuthUser';
 
 import './appHeader.scss';
 
 const AppHeader = () => {
     const location = useLocation();
-
+    const {logout} = useAuthUser();
     const activeStyle = {
         marginTop: '-5px',
         textAlign: "center",
@@ -52,18 +53,15 @@ const AppHeader = () => {
             </nav>
             <div className="app__menu">
                 <ul>
-                    <li><Link className='btn btn-secondary small'
-                        to="/users">User2-35</Link></li>
-
-                    <li><Link className='btn btn-primary small'
-                        to="/tasks">Logout</Link></li>
+                    <li><button className='btn btn-primary small long'
+                        onClick={logout}>User_2-305 (Logout)</button></li>
                 </ul>
             </div>
         </>
     )
 
     return (
-        <header className="app__header">
+        <header className="app__header" style={location.pathname !== '/login' ? null : {justifyContent: "center"}}>
             <h1 className="app__title">
             <Link to="/">
                 <span>Billing</span> panel
