@@ -11,7 +11,7 @@
 
     &__error {
         margin-top: 5px;
-        color: $red;;
+        color: $red;
         font-size: 20px;
     }
 
@@ -27,7 +27,7 @@
         
 
         &-input {
-            background-color: $grey;
+            background-color: $secondry-color;
             border-radius: 12px;
             border: 0;
             box-sizing: border-box;
@@ -75,7 +75,7 @@
         }
 
         &-input:not(:placeholder-shown) ~ &-placeholder {
-            color: #808097;
+            color: $light-grey;
         }
         
         &-input:focus ~ &-placeholder {

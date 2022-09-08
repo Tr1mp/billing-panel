@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useHttp } from "../hooks/http.hook";
 
@@ -7,7 +7,7 @@ const useAuthUser = () => {
     const _urlApptrix = "http://erp.apptrix.ru/api/token/"; 
     const navigate = useNavigate();
     const {request} = useHttp();
-    
+    const location = useLocation();
     const [header, setHeader] = useState({});
     
     
@@ -18,11 +18,12 @@ const useAuthUser = () => {
     }
 
     const login = () => {
+        
         setHeader({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`  
         });
-        return navigate('/');
+        return  location.pathname === '/login' ?  navigate('/') : null;
     }
 
     const logout = () => {

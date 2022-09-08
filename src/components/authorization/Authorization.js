@@ -5,10 +5,13 @@ import * as Yup from 'yup';
 import useAuthUser from "../../services/AuthUser";
 
 import './authorization.scss';
+import { useNavigate } from "react-router-dom";
 
 const Authorization = () => {
     const {isUser, requetsLogin} = useAuthUser();
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
     useEffect(() => {
         isUser();
     }, [])
@@ -19,6 +22,7 @@ const Authorization = () => {
             .catch(err => err.message === "401" ?
                 setError("Неправильное имя пользователя или пароль") :
                 setError(`Error ${err.message}`));
+        (isUser() ? navigate('/') : null)();
     }
 
     const authForm = () => {
@@ -75,7 +79,7 @@ const Authorization = () => {
                     <ErrorFormikMessage className="form__error" name="password" component="h3"/>
                     <button 
                         type="onSubmit" 
-                        className="button-submit">
+                        className="btn btn-primary">
                             submit
                     </button>
                     {error ? <h3 className="form__error">{error}</h3> : null}
