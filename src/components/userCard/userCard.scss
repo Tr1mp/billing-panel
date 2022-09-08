@@ -1,0 +1,63 @@
+@import '../../styles/variables.scss';
+
+.user__card {
+    margin: 0 auto;
+    width: 740px;
+    display: grid;
+    grid-template-columns: 250px auto;
+    align-items: start;
+    background-color: $dark;
+    border-radius: 20px;
+    box-shadow: 5px 5px 25px $light-dark;
+
+    &-round {
+        margin: auto;
+        background-color: $white;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        box-shadow: 0 0 25px $light-grey;
+        &-id {
+            margin: 55px auto;
+            text-align: center;
+            font-size: 36px;
+            line-height: 40px;
+            
+        }
+    }
+
+    &-name {
+        margin: 0 auto;
+        margin-top: 25px;
+        color: $white;
+        font-size: 36px;
+        line-height: 42px;
+    }
+    
+    &-wrapper {
+        margin: 40px auto;
+        text-align: center;
+        span {
+            color: $light-grey;
+            font-size: 14px;
+            line-height: 14px;
+            top: 50px;
+            text-transform: uppercase;
+        }
+    }
+
+    &-group {
+        color: $white;
+        font-size: 22px;
+        line-height: 26px;
+    }
+    
+    &-text {
+        margin-top: 25px;
+        text-align: justify;
+        color: $white;
+        font-size: 24px;
+        line-height: 30px;
+        text-transform: uppercase;
+    }
+}

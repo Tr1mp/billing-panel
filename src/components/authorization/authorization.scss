@@ -1,0 +1,15 @@
+@import '../../styles/form.scss';
+@import '../../styles/button.scss';
+
+.auth__form {
+    margin: 0 auto;
+    background-color: $dark;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 420px;
+    padding: 20px;
+    width: 640px;
+    text-align: center;
+    box-shadow: 5px 5px 25px $light-dark;
+}
+
