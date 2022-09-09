@@ -1,6 +1,5 @@
-
 import { useEffect, useMemo, useState } from 'react';
-
+import { Helmet } from 'react-helmet';
 
 import useAuthUser from '../../services/AuthUser';
 import SetContent from "../../util/SetContent";
@@ -27,6 +26,13 @@ const UsersList = () => {
         [action])
     return (
         <>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Users"
+                />
+                <title>Users</title>
+            </Helmet>
             {element}
         </>
         

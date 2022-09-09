@@ -7,6 +7,7 @@ import { useReactToPrint } from "react-to-print";
 import useAuthUser from "../../services/AuthUser";
 import TabelPage from "../tablePage/TabelPage";
 import SetContent from '../../util/SetContent';
+import { Helmet } from 'react-helmet';
 
 const Timesheets = () => {
     const {id} = useParams();
@@ -31,6 +32,8 @@ const Timesheets = () => {
             .then(() => setAction("loaded"));
     }
 
+    // Добавил ещё вывод name timesheet-a, чисто логически иначе не понятно
+    // над чем работал пользователь всё это время
     function renderUsers(arr) {
         const items = arr.map((item) => {
             const hour = Math.floor(item.duration.minutes / 60);
@@ -56,6 +59,13 @@ const Timesheets = () => {
         [action]);
     return (
         <>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Timesheets"
+                />
+                <title>Timesheets</title>
+            </Helmet>
             {items.length ? <button className='btn btn-primary small print'
                     onClick={handlePrint}>
                 Print PDF

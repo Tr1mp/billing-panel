@@ -1,6 +1,7 @@
 
 
 import { useEffect, useMemo, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 
 import useAuthUser from '../../services/AuthUser';
@@ -58,6 +59,13 @@ const UserCard = () => {
         [action])
     return (
         <> 
+            <Helmet>
+                <meta
+                    name="description"
+                    content="User Card"
+                />
+                <title>User Card</title>
+            </Helmet>
             {item}
         </>
     )

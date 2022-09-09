@@ -6,6 +6,7 @@ import useAuthUser from "../../services/AuthUser";
 
 import './authorization.scss';
 import SetContent from "../../util/SetContent";
+import { Helmet } from "react-helmet";
 
 const Authorization = () => {
     const {isUser, requetsLogin, action, clearError, setAction} = useAuthUser();
@@ -104,6 +105,13 @@ const Authorization = () => {
         [error, action]);
     return (
         <>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="SignIn"
+                />
+                <title>SignIn</title>
+            </Helmet>
             {render}
         </>
         

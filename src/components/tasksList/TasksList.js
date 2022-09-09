@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import useAuthUser from '../../services/AuthUser';
 import SetContent from '../../util/SetContent';
@@ -43,6 +44,13 @@ const TasksList = () => {
 
     return (
         <>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Tasks"
+                />
+                <title>Tasks</title>
+            </Helmet>
             <div className="tasks__list-search">
                 <div className="form-title" style={{fontSize: 22, margin: "0 auto"}}>
                     Enter project name
