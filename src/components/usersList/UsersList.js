@@ -1,78 +1,36 @@
 
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 
 import useAuthUser from '../../services/AuthUser';
+import TabelPage from '../tablePage/TabelPage';
 
 
 
-import './usersList.scss';
+// import './usersList.scss';
 
 const UsersList = () => {
+    const [usersList, setUsersList] = useState([]);
+    const {getData} = useAuthUser();
     const {isUser} = useAuthUser();
     useEffect(() => {
         isUser();
+        onRequest();
     }, [])
 
-    return (
+    const onRequest = () => {
+        getData('admin/users/?fields=id,login,name,email,type')
+            .then(setUsersList);
+    }
 
-        <ul>
-            <li className="tasks__list_item">
-                <div className="tasks__list_item_text_id">
-                    2-202
-                </div>
-                <div className="tasks__list_item_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, deleniti?
-                </div>
-                <div className="tasks__list_item_text">
-                    Sample Project
-                </div>
-            </li>
-            <li className="tasks__list_item">
-                <div className="tasks__list_item_text_id">
-                    2-202
-                </div>
-                <div className="tasks__list_item_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, deleniti?
-                </div>
-                <div className="tasks__list_item_text">
-                    Sample Project
-                </div>
-            </li>
-            <li className="tasks__list_item">
-                <div className="tasks__list_item_text_id">
-                    2-202
-                </div>
-                <div className="tasks__list_item_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, deleniti?
-                </div>
-                <div className="tasks__list_item_text">
-                    Sample Project
-                </div>
-            </li>
-            <li className="tasks__list_item">
-                <div className="tasks__list_item_text_id">
-                    2-202
-                </div>
-                <div className="tasks__list_item_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, deleniti?
-                </div>
-                <div className="tasks__list_item_text">
-                    Sample Project
-                </div>
-            </li>
-            <li className="tasks__list_item">
-                <div className="tasks__list_item_text_id">
-                    2-202
-                </div>
-                <div className="tasks__list_item_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, deleniti?
-                </div>
-                <div className="tasks__list_item_text">
-                    Sample Project
-                </div>
-            </li>
-        </ul>
+    const items = useMemo(() => <TabelPage list={usersList}/>,
+        // eslint-disable-next-line
+        [usersList]);
+    return (
+        <>
+            {items}
+        </>
+        
     )
 }
 

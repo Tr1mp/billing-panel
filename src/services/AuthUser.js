@@ -78,7 +78,7 @@ const useAuthUser = () => {
     }
 
 
-    const getUsers = async (url) => {
+    const getData = async (url) => {
         const res = await request(`${_urlYoutrack}${url}`, null, 'GET', {
             'Content-Type': 'application/json', 
             'Authorization': `Bearer ${apikey}`
@@ -87,7 +87,7 @@ const useAuthUser = () => {
     }
 
 
-    return {isUser, login, logout, requetsLogin, getUsers}
+    return {isUser, login, logout, requetsLogin, getData}
 }
 
 export default useAuthUser;

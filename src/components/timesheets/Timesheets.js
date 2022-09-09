@@ -1,4 +1,4 @@
-import './timesheets.scss';
+// import './timesheets.scss';
 
 const Timesheets = () => {
     return (
