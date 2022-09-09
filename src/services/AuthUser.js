@@ -4,7 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 
 const useAuthUser = () => {
-    const _urlApptrix = "http://erp.apptrix.ru/api/token/"; 
+    const _urlApptrix = "http://erp.apptrix.ru/api/token/";
+    const _urlYoutrack = "https://example.youtrack.cloud/api/";
+    const apikey = process.env.REACT_APP_API_KEY;
     const navigate = useNavigate();
     const {request} = useHttp();
     const location = useLocation();
@@ -36,12 +38,16 @@ const useAuthUser = () => {
         if (localStorage.getItem('refresh')) {
             localStorage.removeItem('refresh')
         }
+        if (localStorage.getItem('username')) {
+            localStorage.removeItem('username')
+        }
         return navigate('/login');
     }
 
-    const rememberToken = (tokens) => {
+    const rememberToken = (tokens, username) => {
         localStorage.setItem('access', tokens.access);
         localStorage.setItem('refresh', tokens.refresh);
+        localStorage.setItem('username', username);
         login();
     }
 
@@ -49,14 +55,14 @@ const useAuthUser = () => {
     // Можно было объединить в один функции с запросом, 
     // но тогда бы они были не читабельные и слишком сложные.
 
-    const requetsLogin = (username, password) => {
-        const body = JSON.stringify({username, password});
-        return request(_urlApptrix, body, "POST")
-            .then(rememberToken);
+    const requetsLogin = async (username, password) => {
+        const body = await JSON.stringify({username, password});
+        return await request(_urlApptrix, body, "POST")
+            .then(tokens => rememberToken(tokens, username));
     } 
     
-    const changeToken = () => {
-        const body = JSON.stringify({
+    const changeToken = async () => {
+        const body =  await JSON.stringify({
             refresh: localStorage.getItem('refresh')
         })
         request(`${_urlApptrix}refresh/`, body, 'POST')
@@ -71,7 +77,17 @@ const useAuthUser = () => {
             .catch(err => err.message === '401' ? changeToken : console.log(err));
     }
 
-    return {isUser, login, logout, requetsLogin}
+
+    const getUsers = async (url) => {
+        const res = await request(`${_urlYoutrack}${url}`, null, 'GET', {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${apikey}`
+        })
+        return res;
+    }
+
+
+    return {isUser, login, logout, requetsLogin, getUsers}
 }
 
 export default useAuthUser;
