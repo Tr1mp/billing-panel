@@ -86,8 +86,17 @@ const useAuthUser = () => {
         return res;
     }
 
+    const getTasksByName = async (name) => {
+        const res = await request(`${_urlYoutrack}issues?fields=id,summary,project(name)&query=project:+%7B${name}%7D`,
+        null, 'GET', {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${apikey}`
+        });
+        return res;
+    }
 
-    return {isUser, login, logout, requetsLogin, getData}
+
+    return {isUser, login, logout, requetsLogin, getData, getTasksByName}
 }
 
 export default useAuthUser;
