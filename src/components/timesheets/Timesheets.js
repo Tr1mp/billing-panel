@@ -6,11 +6,12 @@ import { useReactToPrint } from "react-to-print";
 
 import useAuthUser from "../../services/AuthUser";
 import TabelPage from "../tablePage/TabelPage";
+import SetContent from '../../util/SetContent';
 
 const Timesheets = () => {
     const {id} = useParams();
     const [timesheets, setTimesheets] = useState([]);
-    const {getData, isUser} = useAuthUser();
+    const {getData, isUser, action, clearError, setAction} = useAuthUser();
 
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
@@ -24,9 +25,10 @@ const Timesheets = () => {
     }, [id])
 
     const onRequest = () => {
-        // clearError();
+        clearError();
         getData(`issues/${id}/timeTracking/workItems?fields=id,duration(minutes),creator(name),type(name)`)
-            .then(setTimesheets);
+            .then(setTimesheets)
+            .then(() => setAction("loaded"));
     }
 
     function renderUsers(arr) {
@@ -49,15 +51,15 @@ const Timesheets = () => {
         // eslint-disable-next-line
         [timesheets]);
 
-    const element = useMemo(() => <TabelPage list={items}/>,
+    const element = useMemo(() => SetContent(action, TabelPage, items),
         // eslint-disable-next-line
-        [items]);
+        [action]);
     return (
         <>
-            <button className='btn btn-primary small print'
+            {items.length ? <button className='btn btn-primary small print'
                     onClick={handlePrint}>
                 Print PDF
-            </button>
+            </button> : null}
             <div ref={componentRef}>
                 {element}
             </div>

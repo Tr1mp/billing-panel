@@ -8,7 +8,7 @@ const useAuthUser = () => {
     const _urlYoutrack = "https://example.youtrack.cloud/api/";
     const apikey = process.env.REACT_APP_API_KEY;
     const navigate = useNavigate();
-    const {request} = useHttp();
+    const {request, clearError, action, setAction} = useHttp();
     const location = useLocation();
     const [header, setHeader] = useState({});
     
@@ -97,7 +97,7 @@ const useAuthUser = () => {
     }
 
 
-    return {isUser, login, logout, requetsLogin, getData, getTasksByName}
+    return {isUser, login, logout, requetsLogin, getData, getTasksByName, clearError, action, setAction}
 }
 
 export default useAuthUser;

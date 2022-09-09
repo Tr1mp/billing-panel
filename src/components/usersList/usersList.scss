@@ -39,6 +39,10 @@
         a {
             color: $white;
             background-color: $grey;
+            
+            &:hover {
+                transform: scale(0.9);
+            }
         }
     }
     

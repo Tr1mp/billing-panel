@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import useAuthUser from '../../services/AuthUser';
+import SetContent from "../../util/SetContent";
 
 import "./userCard.scss";
 
 const UserCard = () => {
 
     const {id} = useParams();
-    const {getData, isUser} = useAuthUser();
+    const {getData, isUser, action, clearError, setAction} = useAuthUser();
     const [user, setUser] = useState([]);
 
 
@@ -21,8 +22,10 @@ const UserCard = () => {
     }, [id])
 
     const onRequest = () => {
+        clearError();
         getData(`admin/users/${id}?fields=id,login,name,email,type`)
-            .then(setUser);
+            .then(setUser)
+            .then(() => setAction('loaded'));
     }
 
     function renderItem(obj) {
@@ -50,9 +53,9 @@ const UserCard = () => {
         )
     }
 
-    const item = useMemo(() => renderItem(user),
-        
-        [user])
+    const item = useMemo(() => SetContent(action, () => renderItem(user)), 
+        // eslint-disable-next-line
+        [action])
     return (
         <> 
             {item}

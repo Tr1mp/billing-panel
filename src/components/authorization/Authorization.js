@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Form, Formik, Field, ErrorMessage as ErrorFormikMessage} from 'formik';
 import * as Yup from 'yup';
 
 import useAuthUser from "../../services/AuthUser";
 
 import './authorization.scss';
+import SetContent from "../../util/SetContent";
 
 const Authorization = () => {
-    const {isUser, requetsLogin} = useAuthUser();
+    const {isUser, requetsLogin, action, clearError, setAction} = useAuthUser();
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -16,13 +17,28 @@ const Authorization = () => {
     }, [])
 
     const onRequest = (username, password) => {
-        setError('');
+        clearError();
         requetsLogin(username, password)
+            .then(() => setAction('loaded'))
             .catch(err => err.message === "401" ?
-                setError("Неправильное имя пользователя или пароль") :
+                setError("Incorrect username or password") :
                 setError(`Error ${err.message}`));
     }
 
+    
+
+    const renderBtn = () => {
+        return (
+            <button 
+                type="onSubmit" 
+                className="btn btn-primary">
+                    submit
+            </button>
+        )
+    }
+    const element = useMemo(() => SetContent(action, () => renderBtn()), 
+    // eslint-disable-next-line
+        [action])
     const authForm = () => {
         return (
             <Formik
@@ -75,11 +91,7 @@ const Authorization = () => {
                         
                     </div>
                     <ErrorFormikMessage className="form__error" name="password" component="h3"/>
-                    <button 
-                        type="onSubmit" 
-                        className="btn btn-primary">
-                            submit
-                    </button>
+                    {element}
                     {error ? <h3 className="form__error">{error}</h3> : null}
                 </Form>
             </Formik>
@@ -87,7 +99,9 @@ const Authorization = () => {
         )
     }
 
-    const render = authForm();
+    const render = useMemo(() => authForm(), 
+        // eslint-disable-next-line
+        [error, action]);
     return (
         <>
             {render}

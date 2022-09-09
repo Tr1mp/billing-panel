@@ -1,8 +1,7 @@
-
-
-
 import { useEffect, useMemo, useState } from 'react';
+
 import useAuthUser from '../../services/AuthUser';
+import SetContent from '../../util/SetContent';
 import TabelPage from '../tablePage/TabelPage';
 
 import './tasksList.scss';
@@ -11,13 +10,7 @@ const TasksList = () => {
     const [text, setText] = useState('');
     const [tasksList, setTasksList] = useState([]);
     const {getData, getTasksByName} = useAuthUser();
-    const {isUser} = useAuthUser();
-
-    useEffect(() => {
-        isUser();
-        onRequest();
-        // eslint-disable-next-line
-    }, [])
+    const {isUser, action, clearError, setAction} = useAuthUser();
 
     useEffect(() => {
         isUser();
@@ -30,18 +23,22 @@ const TasksList = () => {
     }, [text])
 
     const onRequestByName = () => {
+        clearError();
         getTasksByName(text)
-            .then(setTasksList);
+            .then(setTasksList)
+            .then(() => setAction("loaded"));
     }
 
     const onRequest = () => {
+        clearError();
         getData('issues?fields=id,summary,project(name)')
-            .then(setTasksList);
+            .then(setTasksList)
+            .then(() => setAction("loaded"));
     }
 
-    const items = useMemo(() => <TabelPage list={tasksList}/>,
-        // eslint-disable-next-line
-        [tasksList]);
+    const element = useMemo(() => SetContent(action, TabelPage, tasksList),
+    // eslint-disable-next-line
+    [action])
 
 
     return (
@@ -67,7 +64,7 @@ const TasksList = () => {
                     </label>
                 </div>
             </div>
-            {items}
+            {element}
         </>
 
     )
