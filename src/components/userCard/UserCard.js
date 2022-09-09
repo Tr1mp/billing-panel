@@ -10,15 +10,20 @@ import "./userCard.scss";
 const UserCard = () => {
 
     const {id} = useParams();
-    const {getData} = useAuthUser();
+    const {getData, isUser} = useAuthUser();
     const [user, setUser] = useState([]);
 
+
     useEffect(() => {
-        getData(`admin/users/${id}?fields=id,login,name,email,type`)
-            .then(setUser);
+        isUser();
+        onRequest()
         // eslint-disable-next-line
     }, [id])
 
+    const onRequest = () => {
+        getData(`admin/users/${id}?fields=id,login,name,email,type`)
+            .then(setUser);
+    }
 
     function renderItem(obj) {
         const {id, name, $type, login, email} = obj;

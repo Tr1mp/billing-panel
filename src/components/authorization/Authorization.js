@@ -5,15 +5,14 @@ import * as Yup from 'yup';
 import useAuthUser from "../../services/AuthUser";
 
 import './authorization.scss';
-import { useNavigate } from "react-router-dom";
 
 const Authorization = () => {
     const {isUser, requetsLogin} = useAuthUser();
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
     useEffect(() => {
         isUser();
+        // eslint-disable-next-line
     }, [])
 
     const onRequest = (username, password) => {

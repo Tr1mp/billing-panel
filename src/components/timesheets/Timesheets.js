@@ -10,7 +10,7 @@ import TabelPage from "../tablePage/TabelPage";
 const Timesheets = () => {
     const {id} = useParams();
     const [timesheets, setTimesheets] = useState([]);
-    const {getData} = useAuthUser();
+    const {getData, isUser} = useAuthUser();
 
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
@@ -18,9 +18,10 @@ const Timesheets = () => {
     });
 
     useEffect(() => {
+        isUser();
         onRequest();
         // eslint-disable-next-line
-    }, [])
+    }, [id])
 
     const onRequest = () => {
         // clearError();

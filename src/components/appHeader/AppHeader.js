@@ -37,7 +37,7 @@ const AppHeader = () => {
         height: '40px',
         width: '130px',
     }
-
+    const username = localStorage.getItem("username") ? localStorage.getItem("username") : "no-name";
     const title = (
         <>
             <nav className="app__menu">
@@ -54,7 +54,7 @@ const AppHeader = () => {
             <div className="app__menu">
                 <ul>
                     <li><button className='btn btn-primary small long'
-                        onClick={logout}>User_2-305 (Logout)</button></li>
+                        onClick={logout}>{username} (Logout)</button></li>
                 </ul>
             </div>
         </>

@@ -1,11 +1,6 @@
 
 import { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useHttp } from '../../hooks/http.hook';
-
-
-import useAuthUser from '../../services/AuthUser';
-
 
 
 import './tableList.scss';

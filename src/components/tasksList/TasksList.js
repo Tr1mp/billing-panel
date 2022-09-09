@@ -12,6 +12,7 @@ const TasksList = () => {
     const [tasksList, setTasksList] = useState([]);
     const {getData, getTasksByName} = useAuthUser();
     const {isUser} = useAuthUser();
+
     useEffect(() => {
         isUser();
         onRequest();
@@ -19,6 +20,7 @@ const TasksList = () => {
     }, [])
 
     useEffect(() => {
+        isUser();
         if (text.length > 2) {
             onRequestByName();
         } else if (!text.length) {

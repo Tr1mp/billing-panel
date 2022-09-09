@@ -71,6 +71,7 @@ const useAuthUser = () => {
     }
 
     // та самая функция, которая выдаёт ошибку 400 при запросе с токеном в header.
+    // eslint-disable-next-line
     const middleware = () => {
         request(_urlApptrix, null, "POST", header)
             .then(rememberToken)

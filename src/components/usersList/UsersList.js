@@ -11,11 +11,11 @@ import TabelPage from '../tablePage/TabelPage';
 
 const UsersList = () => {
     const [usersList, setUsersList] = useState([]);
-    const {getData} = useAuthUser();
-    const {isUser} = useAuthUser();
+    const {getData, isUser} = useAuthUser();
     useEffect(() => {
         isUser();
         onRequest();
+        // eslint-disable-next-line
     }, [])
 
     const onRequest = () => {
