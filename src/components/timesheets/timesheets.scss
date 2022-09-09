@@ -1,15 +1,21 @@
 @import '../../styles/variables.scss';
 @import '../../styles/button.scss';
 
+
+.print {
+    margin: 0 auto 10px auto;
+}
+
 .tasks__list {
-    &-table {
+    &-wrapper {
+        align-items: center;
+        justify-content: center;
+        
         margin: 0 auto;
-        width: 1000px;
         margin-top: 30px;
-        background-color: $dark;
+
         border-radius: 10px;
-        box-shadow: 15px 15px 30px #000000;
-        color: $white;
+
     }
     &-item {
         display: flex;

@@ -13,20 +13,20 @@ import './tableList.scss';
 const TabelPage = ({list}) => {
     const location = useLocation();
      
-    function renderTableItem({id, name, login, email, summary, project}, btn = null) {
+    function renderTableItem({id, name, login, email, summary, project, creator, time}, btn = null) {
         return (
             <>
-                <div className="table__list-item-text id">
-                    {id}
+                <div className={creator ? null : "table__list-item-text id"}>
+                    {creator ? null : id}
                 </div>
                 <div className="table__list-item-text name">
                     {name ? name : project.name}
                 </div>
-                <div className={login ? "table__list-item-text" : null}>
-                    {login ? login : null}
+                <div className={login || creator ? "table__list-item-text" : null}>
+                    {login ? login : creator ? creator : null}
                 </div>
                 <div className="table__list-item-text">
-                    {email ? email : summary ? summary : "no data available"}
+                    {email ? email : summary ? summary : time ? time : "no data available"}
                 </div>
                 {btn ? btn : null}
             </>
