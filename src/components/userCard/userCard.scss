@@ -1,11 +1,15 @@
 @import '../../styles/variables.scss';
 
 .user__card {
+    padding: 20px;
     margin: 0 auto;
-    width: 740px;
+    height: 400px;
+    width: 820px;
     display: grid;
     grid-template-columns: 250px auto;
-    align-items: start;
+    column-gap: 50px;
+    align-items: center;
+    justify-content: center;
     background-color: $dark;
     border-radius: 20px;
     box-shadow: 5px 5px 25px $light-dark;
@@ -28,7 +32,6 @@
 
     &-name {
         margin: 0 auto;
-        margin-top: 25px;
         color: $white;
         font-size: 36px;
         line-height: 42px;
@@ -38,26 +41,26 @@
         margin: 40px auto;
         text-align: center;
         span {
+            
             color: $light-grey;
             font-size: 14px;
             line-height: 14px;
-            top: 50px;
             text-transform: uppercase;
         }
     }
-
-    &-group {
-        color: $white;
-        font-size: 22px;
-        line-height: 26px;
-    }
     
     &-text {
-        margin-top: 25px;
+        margin-top: 20px;
         text-align: justify;
         color: $white;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 30px;
         text-transform: uppercase;
+
+        &-span {
+            position: relative;
+            left: -25px;
+        }
     }
 }
+
